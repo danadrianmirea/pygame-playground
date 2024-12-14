@@ -3,7 +3,7 @@ from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-rotSpeed = 0.3
+degreesPerSecond = 90
 
 def draw_triangle():
     # Draw a triangle
@@ -42,10 +42,13 @@ def main():
     glTranslatef(0.0, 0.0, -2.0)  # Move the triangle into view
 
     angle = 0  # Initialize rotation angle
+    clock = pygame.time.Clock()  # Initialize pygame clock for delta time calculation
 
     # Main loop
     running = True
     while running:
+        delta_time = clock.tick(60) / 1000.0  # Calculate delta time in seconds
+
         for event in pygame.event.get():
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 running = False
@@ -61,10 +64,8 @@ def main():
         # Draw the triangle
         draw_triangle()
 
-        # Update the angle for the next frame
-        angle += rotSpeed  # Increase the angle to make the triangle spin
-        if(angle > 360):
-            angle -= 360
+        # Update the angle for the next frame using delta time
+        angle += degreesPerSecond * delta_time  # Rotate 90 degrees per second
 
         # Swap buffers to display the rendered image
         pygame.display.flip()
