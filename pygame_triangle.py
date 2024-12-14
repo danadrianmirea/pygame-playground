@@ -66,6 +66,8 @@ def main():
 
         # Update the angle for the next frame using delta time
         angle += degreesPerSecond * delta_time  # Rotate 90 degrees per second
+        if(angle > 360):
+            angle -= 360
 
         # Swap buffers to display the rendered image
         pygame.display.flip()
