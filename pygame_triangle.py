@@ -3,10 +3,9 @@ from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-def draw_triangle():
-    # Clear the screen and set the color
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+rotSpeed = 0.3
 
+def draw_triangle():
     # Draw a triangle
     glBegin(GL_TRIANGLES)
     
@@ -42,6 +41,8 @@ def main():
     glLoadIdentity()
     glTranslatef(0.0, 0.0, -2.0)  # Move the triangle into view
 
+    angle = 0  # Initialize rotation angle
+
     # Main loop
     running = True
     while running:
@@ -49,8 +50,21 @@ def main():
             if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 running = False
 
+        # Clear the screen
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
+        # Apply rotation
+        glLoadIdentity()
+        glTranslatef(0.0, 0.0, -2.0)
+        glRotatef(angle, 0, 1, 0)  # Rotate around the Y-axis
+
         # Draw the triangle
         draw_triangle()
+
+        # Update the angle for the next frame
+        angle += rotSpeed  # Increase the angle to make the triangle spin
+        if(angle > 360):
+            angle -= 360
 
         # Swap buffers to display the rendered image
         pygame.display.flip()
