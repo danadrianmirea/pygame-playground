@@ -1,1 +1,3 @@
-"# pygame-playground" 
+A repo for learning pygame
+
+
