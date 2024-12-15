@@ -53,22 +53,24 @@ displaysurface = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Game")
 
 PT1 = platform()
-P1 = Player()
+player = Player()
 
 all_sprites = pygame.sprite.Group()
 all_sprites.add(PT1)
-all_sprites.add(P1)
+all_sprites.add(player)
 
 while True:
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
-     
+
+    # update
+    player.move()
+  
+    # draw   
     displaysurface.fill((0,0,0))
- 
     for entity in all_sprites:
         displaysurface.blit(entity.surf, entity.rect)
- 
     pygame.display.update()
     FramePerSec.tick(FPS)
