@@ -3,12 +3,26 @@ from pygame.locals import *
 
 
 class Player(pygame.sprite.Sprite):
+
+3
+4
+5
+6
+7
+8
+9
+10
+class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__() 
         self.surf = pygame.Surface((30, 30))
         self.surf.fill((128,255,40))
-        self.rect = self.surf.get_rect(center = (10, 420))
- 
+        self.rect = self.surf.get_rect()
+   
+        self.pos = vec((10, 385))
+        self.vel = vec(0,0)
+        self.acc = vec(0,0)
+         
 class platform(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
