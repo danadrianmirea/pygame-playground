@@ -1,17 +1,7 @@
+import sys
 import pygame
 from pygame.locals import *
 
-
-class Player(pygame.sprite.Sprite):
-
-3
-4
-5
-6
-7
-8
-9
-10
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__() 
@@ -22,7 +12,24 @@ class Player(pygame.sprite.Sprite):
         self.pos = vec((10, 385))
         self.vel = vec(0,0)
         self.acc = vec(0,0)
-         
+
+    def move(self):
+        self.acc = vec(0,0)
+        pressed_keys = pygame.key.get_pressed()
+        if pressed_keys[K_LEFT]:
+            self.acc.x = -ACC
+        if pressed_keys[K_RIGHT]:
+            self.acc.x = ACC         
+
+        self.acc.x += self.vel.x * FRIC
+        self.vel += self.acc
+        self.pos += self.vel + 0.5 * self.acc
+        if self.pos.x > WIDTH:
+            self.pos.x = 0
+        if self.pos.x < 0:
+            self.pos.x = WIDTH            
+        self.rect.midbottom = self.pos
+
 class platform(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
