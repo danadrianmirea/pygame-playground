@@ -16,8 +16,6 @@ class platform(pygame.sprite.Sprite):
         self.surf.fill((255,0,0))
         self.rect = self.surf.get_rect(center = (WIDTH/2, HEIGHT - 10))
  
-PT1 = platform()
-P1 = Player()
  
 pygame.init()
 vec = pygame.math.Vector2  # 2 for two dimensional
@@ -33,3 +31,23 @@ FramePerSec = pygame.time.Clock()
 displaysurface = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Game")
 
+PT1 = platform()
+P1 = Player()
+
+all_sprites = pygame.sprite.Group()
+all_sprites.add(PT1)
+all_sprites.add(P1)
+
+while True:
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
+     
+    displaysurface.fill((0,0,0))
+ 
+    for entity in all_sprites:
+        displaysurface.blit(entity.surf, entity.rect)
+ 
+    pygame.display.update()
+    FramePerSec.tick(FPS)
