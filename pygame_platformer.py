@@ -86,7 +86,6 @@ while True:
     # update
     player.update()
     
-  
     # draw   
     displaysurface.fill((0,0,0))
     for entity in all_sprites:
