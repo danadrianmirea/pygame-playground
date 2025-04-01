@@ -1,3 +1,1 @@
-A repo for learning pygame
-
-
+A repo where I have various pygame prototypes
